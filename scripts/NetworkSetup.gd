@@ -11,7 +11,7 @@ func _ready():
 	Global.connect("toggle_network_setup", self, "_toggle_network_setup")
 
 func _on_ip_address_text_changed(new_text):
-	pass
+	Network.IP_ADDR = new_text
 
 
 func _on_Host_button_pressed():

@@ -2,7 +2,7 @@ extends Node
 
 const DEFAULT_PORT = 28960
 const MAX_CLIENT = 6
-const IP_ADDR = "127.0.0.1"
+var IP_ADDR = "127.0.0.1"
 var server = null
 var client = null
 
