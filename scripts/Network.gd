@@ -2,7 +2,7 @@ extends Node
 
 const DEFAULT_PORT = 28960
 const MAX_CLIENT = 6
-var IP_ADDR = "127.0.0.1"
+var IP_ADDR = "35.230.124.84"
 var server = null
 var client = null
 
@@ -18,6 +18,7 @@ func create_server():
 	server = NetworkedMultiplayerENet.new()
 	server.create_server(DEFAULT_PORT, MAX_CLIENT)
 	get_tree().set_network_peer(server)
+	print("Server started")
 	
 func join_server():
 	print("Joining server")
