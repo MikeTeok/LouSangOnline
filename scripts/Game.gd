@@ -1,4 +1,4 @@
-extends Node2D
+extends Spatial
 
 var player = preload("res://scenes/player.tscn")
 
@@ -18,6 +18,7 @@ func _instance_player(id):
 		player_instance.name = str(id)
 		
 		add_child(player_instance)
+		player_instance.global_transform.origin = Vector3(0, 15, 0)
 	
 func _player_connected(id):
 	print("Player " + str(id) + " has connected")
