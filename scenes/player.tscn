@@ -1,10 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/player.gd" type="Script" id=2]
 
-[sub_resource type="VisualShaderNodeColorConstant" id=1]
-output_port_for_preview = 0
-constant = Color( 1, 0.394531, 0.394531, 1 )
+[sub_resource type="CylinderShape" id=5]
+radius = 0.5
+height = 20.0
 
 [sub_resource type="VisualShader" id=2]
 code = "shader_type spatial;
@@ -19,17 +19,7 @@ void vertex() {
 }
 
 void fragment() {
-// Color:2
-	vec3 n_out2p0 = vec3(1.000000, 0.394531, 0.394531);
-	float n_out2p1 = 1.000000;
-
 // Output:0
-	ALBEDO = n_out2p0;
-	EMISSION = n_out2p0;
-	NORMAL = n_out2p0;
-	NORMALMAP = n_out2p0;
-	ANISOTROPY_FLOW = n_out2p0.xy;
-	TRANSMISSION = n_out2p0;
 
 }
 
@@ -40,9 +30,6 @@ void light() {
 "
 graph_offset = Vector2( 0, 132.283 )
 nodes/fragment/0/position = Vector2( 820, -20 )
-nodes/fragment/2/node = SubResource( 1 )
-nodes/fragment/2/position = Vector2( 460, 160 )
-nodes/fragment/connections = PoolIntArray( 2, 0, 0, 7, 2, 0, 0, 8, 2, 0, 0, 0, 2, 0, 0, 5, 2, 0, 0, 15, 2, 0, 0, 17 )
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = SubResource( 2 )
@@ -53,16 +40,9 @@ top_radius = 0.7
 bottom_radius = 0.5
 height = 20.0
 
-[sub_resource type="CylinderShape" id=5]
-radius = 0.5
-height = 20.0
-
 [node name="Player" type="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 0.999996, 0.00272274, 0, -0.00272274, 0.999996, 0, 0, 0 )
 script = ExtResource( 2 )
-
-[node name="CSGMesh" type="CSGMesh" parent="."]
-mesh = SubResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 5 )
@@ -72,5 +52,12 @@ wait_time = 0.03
 autostart = true
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, -2.32831e-10, 0, 2.32831e-10, 1, 0, 15, 0 )
+
+[node name="CSGMesh" type="CSGMesh" parent="Camera"]
+transform = Transform( -0.911179, 0.245966, -0.330534, -0.333963, 0.0289099, 0.942143, 0.241291, 0.968847, 0.0558014, 1.49012e-08, -0.0388966, -16.2669 )
+mesh = SubResource( 4 )
 
 [connection signal="timeout" from="NetworkTickRate" to="." method="_on_NetworkTickRate_timeout"]
