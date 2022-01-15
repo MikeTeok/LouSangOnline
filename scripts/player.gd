@@ -5,30 +5,28 @@ var puppet_position = Vector2.ZERO
 onready var tween = $Tween
 onready var timer = $NetworkTickRate
 
-#onready var camera = $Camera
-#var mouseDelta : Vector2 = Vector2()
-#var minLookAngle : float = -45.0
-#var maxLookAngle : float = 45.0
-#var lookSensitivity : float = 0.5
+onready var camera 
+var ray_origin = Vector3()
+var ray_end = Vector3()
+
+func _ready():
+	pass
 
 func _physics_process(delta):
 	if is_network_master():
 		pass
 
 func _process (delta):
-	pass
-	# rotate camera along X axis
-	#camera.rotation_degrees -= Vector3(rad2deg(mouseDelta.y), 0, 0) * lookSensitivity * delta
-	# clamp the vertical camera rotation
-	#camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, minLookAngle, maxLookAngle)
-	# rotate player along Y axis
-	#rotation_degrees -= Vector3(0, rad2deg(mouseDelta.x), 0) * lookSensitivity * delta
-	# reset the mouse delta vector
-	#mouseDelta = Vector2()
-
-#func _unhandled_input(event):
-#	if event is InputEventMouseMotion:
-#		mouseDelta = event.relative
+	var space_state = get_world().direct_space_state
+	var mouse_position = get_viewport().get_mouse_position()
+	
+	ray_origin = camera.project_ray_origin(mouse_position)
+	ray_end = ray_origin + camera.project_ray_normal(mouse_position) * 1000
+	var intersection = space_state.intersect_ray(ray_origin, ray_end)
+	
+	if not intersection.empty():
+		var pos = intersection.position
+		global_transform.origin = Vector3(pos.x, translation.y, pos.z)
 
 puppet func update_state(p_position):
 	puppet_position = p_position
