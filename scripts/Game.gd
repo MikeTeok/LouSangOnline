@@ -12,13 +12,13 @@ func _ready():
 		Global.emit_signal("toggle_network_setup", false)
 
 func _instance_player(id):
-	if id != 1:
-		var player_instance = player.instance()
-		player_instance.set_network_master(id)
-		player_instance.name = str(id)
-		
-		add_child(player_instance)
-		player_instance.global_transform.origin = Vector3(0, 15, 0)
+	#if id != 1:
+	var player_instance = player.instance()
+	player_instance.set_network_master(id)
+	player_instance.name = str(id)
+	print("add liao")
+	add_child(player_instance)
+	player_instance.global_transform.origin = Vector3(0, 0, 0)
 	
 func _player_connected(id):
 	print("Player " + str(id) + " has connected")
