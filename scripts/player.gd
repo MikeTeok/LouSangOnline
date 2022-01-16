@@ -4,19 +4,23 @@ extends KinematicBody
 var puppet_position = Vector2.ZERO
 onready var tween = $Tween
 onready var timer = $NetworkTickRate
+onready var animation = $chopstick/AnimationPlayer
 
 onready var camera 
 var ray_origin = Vector3()
 var ray_end = Vector3()
 
 func _ready():
-	pass
+	animation.play("idle")
 
 func _physics_process(delta):
 	if is_network_master():
 		pass
 
-func _process (delta):
+func _process(delta):
+	pass
+	
+func _move():
 	var space_state = get_world().direct_space_state
 	var mouse_position = get_viewport().get_mouse_position()
 	
@@ -41,3 +45,16 @@ func _on_NetworkTickRate_timeout():
 		#rpc_unreliable("update_state", global_position)
 	else:
 		timer.stop()
+
+
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_LEFT and event.pressed:
+			animation.play("kiap")
+		elif event.button_index == BUTTON_LEFT and not event.pressed:
+			animation.play("release")
+	
+	if event is InputEventMouseMotion:
+		_move()
+		
+

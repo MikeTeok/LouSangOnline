@@ -16,3 +16,5 @@ autostart = true
 [node name="Tween" type="Tween" parent="."]
 
 [connection signal="timeout" from="NetworkTickRate" to="." method="_on_NetworkTickRate_timeout"]
+
+[editable path="chopstick"]
