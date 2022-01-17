@@ -26,7 +26,7 @@ func _move():
 	
 	ray_origin = camera.project_ray_origin(mouse_position)
 	ray_end = ray_origin + camera.project_ray_normal(mouse_position) * 1000
-	var intersection = space_state.intersect_ray(ray_origin, ray_end)
+	var intersection = space_state.intersect_ray(ray_origin, ray_end, [self], 0x1)
 	
 	if not intersection.empty():
 		var pos = intersection.position
@@ -56,5 +56,7 @@ func _input(event):
 	
 	if event is InputEventMouseMotion:
 		_move()
-		
 
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "release":
+		animation.play("idle")
