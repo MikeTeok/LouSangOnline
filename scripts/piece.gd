@@ -3,6 +3,7 @@ extends Spatial
 onready var holding = false
 onready var hold_area = null
 onready var body = $SoftBody
+onready var area = $Area
 
 
 # Called when the node enters the scene tree for the first time.
@@ -12,6 +13,7 @@ func _ready():
 
 
 func _process(delta):
+	area.global_transform.origin = self.global_transform.origin
 	if holding:
 		body.set_point_pinned(0, true, hold_area.get_path())
 		#global_transform.origin = hold_area.global_transform.origin

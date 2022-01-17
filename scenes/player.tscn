@@ -19,10 +19,10 @@ tracks/0/keys = {
 }
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.0221364, 0.0129022, 0.00213252 )
+extents = Vector3( 0.022, 0.013, 0.006 )
 
 [node name="Player" type="KinematicBody"]
-transform = Transform( 1, 0, 0, 0, 0.999996, 0.00272274, 0, -0.00272274, 0.999996, 0, 0, 0 )
+transform = Transform( 5, 0, 0, 0, 4.99998, 0.0136137, 0, -0.0136137, 4.99998, 0, 0, 0 )
 collision_layer = 2
 collision_mask = 5
 input_ray_pickable = false
@@ -41,11 +41,12 @@ autostart = true
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Area" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0206603, 5.62529e-05 )
 collision_layer = 2
 collision_mask = 4
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
-transform = Transform( 1, 0, 0, 0, 0.847001, -0.531591, 0, 0.531591, 0.847001, 0, 0.0173403, 0.0029929 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 1 )
 disabled = true
 
