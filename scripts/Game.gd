@@ -1,6 +1,7 @@
 extends Spatial
 
 var player = preload("res://scenes/player.tscn")
+onready var fps_text = $fps
 
 func _ready():
 	get_tree().connect("network_peer_connected", self, "_player_connected")
@@ -10,6 +11,11 @@ func _ready():
 	
 	if get_tree().network_peer != null:
 		Global.emit_signal("toggle_network_setup", false)
+
+func _process(delta):
+	var text = ""
+	text += "fps: " + str(Performance.get_monitor(Performance.TIME_FPS))
+	fps_text.text = text
 
 func _instance_player(id):
 	#if id != 1:

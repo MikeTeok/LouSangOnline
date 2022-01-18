@@ -1,33 +1,32 @@
 extends RigidBody
 
 onready var holding = false
+onready var holding_offset = 0
 onready var throwing = false
 onready var hold_area = null
-onready var area = $Area
+onready var _area = $Area
 
 
 func _ready():
-	#i think this is not needed but when delete this, area cannot detect. 
-	area.global_transform.origin = global_transform.origin
+	_area.global_transform.origin = global_transform.origin
 
 func _process(delta):
 	if holding:
 		#this is prevent when u holding too long, gravity force stack and unable to throw
 		gravity_scale = 0 
-		global_transform.origin = hold_area.global_transform.origin
+		global_transform.origin = hold_area.global_transform.origin - holding_offset
 	elif throwing:
 		gravity_scale = 1
 		throwing = false
-		print("throwing")
-		apply_central_impulse(Vector3(0,5,0))
 
 func _on_Area_area_entered(area):
-	print("area entered")
 	holding = true
+	holding_offset = area.global_transform.origin - global_transform.origin
 	hold_area = area
 
 
 func _on_Area_area_exited(area):
-	print("area exited")
 	holding = false
 	throwing = true
+	if area.get_parent().get_parent().current_state == "release":
+		apply_central_impulse(Vector3(0,10,0))

@@ -3,7 +3,7 @@
 [ext_resource path="res://Material.material" type="Material" id=2]
 
 [sub_resource type="BoxShape" id=6]
-extents = Vector3( 0.022, 0.013, 0.006 )
+extents = Vector3( 0.0817898, 0.013, 0.006 )
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "chopstick_Cube"
@@ -141,7 +141,7 @@ tracks/2/keys = {
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.123046, 0 )
 
 [node name="Area" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.102386, 5.62529e-05 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.103708, 5.62529e-05 )
 collision_layer = 2
 collision_mask = 4
 
@@ -150,7 +150,7 @@ transform = Transform( 1, 0, 0, 0, 1, 4.65661e-10, 0, -4.65661e-10, 1, 0, 0.0008
 shape = SubResource( 6 )
 
 [node name="Armature" type="Spatial" parent="."]
-transform = Transform( -0.133496, 0, 0, 0, -0.133496, 0, 0, 0, -0.133496, 0, 0, 0 )
+transform = Transform( -0.5, 0, 0, 0, -0.5, 0, 0, 0, -0.5, 0, 0.321, 0 )
 
 [node name="Skeleton" type="Skeleton" parent="Armature"]
 bones/0/name = "Bone"

@@ -6,6 +6,8 @@ onready var tween = $Tween
 onready var timer = $NetworkTickRate
 onready var animation = $chopstick/AnimationPlayer
 
+onready var current_state = "idle"
+
 onready var camera 
 var ray_origin = Vector3()
 var ray_end = Vector3()
@@ -50,8 +52,10 @@ func _on_NetworkTickRate_timeout():
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
+			current_state = "kiap"
 			animation.play("kiap")
 		elif event.button_index == BUTTON_LEFT and not event.pressed:
+			current_state = "release"
 			animation.play("release")
 	
 	if event is InputEventMouseMotion:
@@ -59,4 +63,5 @@ func _input(event):
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "release":
+		current_state = "idle"
 		animation.play("idle")
