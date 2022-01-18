@@ -1,6 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Material.material" type="Material" id=2]
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 0.022, 0.013, 0.006 )
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "chopstick_Cube"
@@ -27,6 +30,21 @@ bind/1/name = "Bone.001"
 bind/1/bone = -1
 bind/1/pose = Transform( -4.85819, 2.91202, -4.90219, -0.044285, -6.45937, -3.79314, 5.7017, 2.43105, -4.20643, 0.101195, 0.912179, -0.113899 )
 
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Area/CollisionShape:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
 [sub_resource type="Animation" id=3]
 resource_name = "idle"
 length = 0.001
@@ -45,7 +63,7 @@ tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = PoolRealArray( 0, 1, 0, 0, 0, 0.0254229, -0.0563924, 0.0212238, 0.997859, 1, 1, 1 )
 tracks/2/type = "value"
-tracks/2/path = NodePath("../Area/CollisionShape:disabled")
+tracks/2/path = NodePath("Area/CollisionShape:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -76,16 +94,16 @@ tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = PoolRealArray( 0, 1, 0, 0, 0, 0.0254229, -0.0563924, 0.0212238, 0.997859, 1, 1, 1, 0.05, 1, -0.00379565, -0.000374913, 0.00355041, 0.0270796, -0.0600674, 0.022607, 0.997571, 1, 1, 1, 0.1, 1, -0.0104741, -0.0010345, 0.00979736, 0.0299935, -0.0665309, 0.0250396, 0.997019, 1, 1, 1, 0.15, 1, -0.0147021, -0.00145221, 0.0137523, 0.0318377, -0.0706217, 0.0265791, 0.996641, 1, 1, 1, 0.24, 1, -0.00682405, -0.000674069, 0.00638315, 0.0145561, -0.0322881, 0.0121519, 0.999299, 1, 1, 1, 0.3, 1, -0.00036034, -3.5584e-05, 0.000337064, 0.000768221, -0.00170404, 0.000641345, 0.999998, 1, 1, 1, 0.32, 1, 0, 0, 0, 0, -2.98023e-08, 2.98023e-08, 1, 1, 1, 1 )
 tracks/2/type = "value"
-tracks/2/path = NodePath("../Area/CollisionShape:disabled")
+tracks/2/path = NodePath("Area/CollisionShape:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.01, 0.16 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ true, false ]
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -107,7 +125,7 @@ tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = PoolRealArray( 0, 1, 0, 0, 0, 2.22045e-16, -1.49012e-08, 2.98023e-08, 1, 1, 1, 1, 0.0666667, 1, -0.00448129, 0.00105363, 0.00296825, 0.0742242, -0.0138828, -0.0655104, 0.994991, 1, 1, 1, 0.133333, 1, -0.0123662, 0.00290757, 0.00819078, 0.204563, -0.0382613, -0.180548, 0.961297, 1, 1, 1, 0.2, 1, -0.0173581, 0.00408119, 0.0114972, 0.282914, -0.052916, -0.2497, 0.924559, 1, 1, 1, 0.266667, 1, -0.0146075, 0.00417197, 0.00892931, 0.276989, -0.0515839, -0.242938, 0.928223, 1, 1, 1, 0.333333, 1, -0.00777936, 0.00418091, 0.00277367, 0.251475, -0.0463215, -0.217062, 0.942071, 1, 1, 1, 0.4, 1, -0.00301436, 0.00418711, -0.00152192, 0.233449, -0.0426084, -0.198815, 0.950873, 1, 1, 1, 0.416667, 1, -0.00237572, 0.00418794, -0.00209764, 0.231021, -0.0421086, -0.19636, 0.951997, 1, 1, 1, 0.65, 1, -0.00237572, 0.00418794, -0.00209764, 0.231021, -0.0421086, -0.19636, 0.951997, 1, 1, 1, 0.7, 1, 0, 0, 0, 0.025, -0.056, 0.021, 0.998, 1, 1, 1 )
 tracks/2/type = "value"
-tracks/2/path = NodePath("../Area/CollisionShape:disabled")
+tracks/2/path = NodePath("Area/CollisionShape:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -121,6 +139,15 @@ tracks/2/keys = {
 
 [node name="chopstick" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.123046, 0 )
+
+[node name="Area" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.102386, 5.62529e-05 )
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+transform = Transform( 1, 0, 0, 0, 1, 4.65661e-10, 0, -4.65661e-10, 1, 0, 0.000827756, 2.25376e-06 )
+shape = SubResource( 6 )
 
 [node name="Armature" type="Spatial" parent="."]
 transform = Transform( -0.133496, 0, 0, 0, -0.133496, 0, 0, 0, -0.133496, 0, 0, 0 )
@@ -145,6 +172,7 @@ material/0 = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
+anims/RESET = SubResource( 7 )
 anims/idle = SubResource( 3 )
 anims/kiap = SubResource( 4 )
 anims/release = SubResource( 5 )

@@ -1,22 +1,25 @@
-extends Spatial
+extends RigidBody
 
 onready var holding = false
+onready var throwing = false
 onready var hold_area = null
-onready var body = $SoftBody
 onready var area = $Area
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
-
-
+	#i think this is not needed but when delete this, area cannot detect. 
+	area.global_transform.origin = global_transform.origin
 
 func _process(delta):
-	area.global_transform.origin = self.global_transform.origin
 	if holding:
-		body.set_point_pinned(0, true, hold_area.get_path())
-		#global_transform.origin = hold_area.global_transform.origin
+		#this is prevent when u holding too long, gravity force stack and unable to throw
+		gravity_scale = 0 
+		global_transform.origin = hold_area.global_transform.origin
+	elif throwing:
+		gravity_scale = 1
+		throwing = false
+		print("throwing")
+		apply_central_impulse(Vector3(0,5,0))
 
 func _on_Area_area_entered(area):
 	print("area entered")
@@ -25,4 +28,6 @@ func _on_Area_area_entered(area):
 
 
 func _on_Area_area_exited(area):
+	print("area exited")
 	holding = false
+	throwing = true
