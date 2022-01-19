@@ -17,7 +17,7 @@ var ray_end = Vector3()
 func _ready():
 	if is_network_master():
 		name_label.text = myname
-		rpc("update_name", myname)
+#		rpc("update_name", myname)
 	animation.play("idle")
 
 func _physics_process(delta):
@@ -59,6 +59,9 @@ func _on_NetworkTickRate_timeout():
 
 
 func _input(event):
+	if not is_network_master():
+		return 
+
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
 			current_state = "kiap"
