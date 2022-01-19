@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/NetworkSetup.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Game.gd" type="Script" id=2]
+[ext_resource path="res://scenes/plate.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/RtsCameralController.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/multipieces.tscn" type="PackedScene" id=5]
 
@@ -55,10 +56,11 @@ size = Vector2( 10, 10 )
 script = ExtResource( 2 )
 
 [node name="multipieces" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.473969, -2.23708 )
 piece_color = Color( 0, 0.454902, 0.113725, 1 )
 
 [node name="multipieces2" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.4307 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.538472, 1.05297 )
 piece_color = Color( 0.929412, 0.470588, 0.168627, 1 )
 
 [node name="NetworkSetup" type="Control" parent="."]
@@ -127,6 +129,8 @@ margin_top = 14.0
 margin_right = 106.0
 margin_bottom = 54.0
 text = "fps:"
+
+[node name="plate" parent="." instance=ExtResource( 3 )]
 
 [connection signal="text_changed" from="NetworkSetup/VBoxContainer/ip_address" to="NetworkSetup" method="_on_ip_address_text_changed"]
 [connection signal="pressed" from="NetworkSetup/VBoxContainer/Host_button" to="NetworkSetup" method="_on_Host_button_pressed"]

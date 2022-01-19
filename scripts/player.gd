@@ -32,7 +32,7 @@ func _move():
 	
 	if not intersection.empty():
 		var pos = intersection.position
-		global_transform.origin = Vector3(pos.x, translation.y, pos.z)
+		global_transform.origin = Vector3(pos.x, pos.y, pos.z)
 
 puppet func update_state(p_position):
 	puppet_position = p_position
