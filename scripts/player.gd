@@ -17,7 +17,7 @@ var ray_end = Vector3()
 func _ready():
 	if is_network_master():
 		name_label.text = myname
-		#rpc("update_name", myname)
+		rpc("update_name", myname)
 	animation.play("idle")
 
 func _physics_process(delta):
@@ -53,8 +53,7 @@ puppet func update_name(newname):
 
 func _on_NetworkTickRate_timeout():
 	if is_network_master():
-		pass
-		#rpc_unreliable("update_state", global_position)
+		rpc_unreliable("update_state", global_transform.origin)
 	else:
 		timer.stop()
 
