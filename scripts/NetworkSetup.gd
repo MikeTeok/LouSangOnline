@@ -25,6 +25,8 @@ func _on_Join_button_pressed():
 	if myname == "":
 		$VBoxContainer/name.modulate = Color("ff0000")
 		return
+	Save.save_data["Player_name"] = myname
+	Save.save_game()
 	Network.join_server()
 	hide()
 	

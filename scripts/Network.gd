@@ -3,8 +3,13 @@ extends Node
 const DEFAULT_PORT = 28960
 const MAX_CLIENT = 6
 var IP_ADDR = "35.230.124.84"
+#var IP_ADDR = "127.0.0.1"
 var server = null
 var client = null
+
+var local_player_id = 0
+sync var players = {}
+sync var player_data = {}
 
 func _ready():
 	get_tree().connect("connected_to_server", self, "_connected_to_server")
@@ -29,6 +34,9 @@ func join_server():
 	
 func _connected_to_server():
 	print("Successfully connected to the server")
+	
+	register_player()
+	rpc_id(1, "send_player_info", local_player_id, player_data)
 
 func _server_disconnected():
 	print("Disconnected from the server")
@@ -44,3 +52,16 @@ func _player_connected(id):
 func reset_network_connection():
 	if get_tree().has_network_peer():
 		get_tree().network_peer = null
+
+func register_player():
+	local_player_id = get_tree().get_network_unique_id()
+	self.player_data = Save.save_data
+	self.players[local_player_id] = player_data
+
+sync func update_players_data():
+	print("update_players_data()")
+#	get_tree().call_group("Player", "update_name")
+	for id in players:
+		var player_name = players[id]["Player_name"]
+		var player_node = get_node("/root/Game").get_node(str(id))
+		player_node.update_name(player_name)
