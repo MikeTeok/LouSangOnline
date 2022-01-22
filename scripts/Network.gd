@@ -2,8 +2,8 @@ extends Node
 
 const DEFAULT_PORT = 28960
 const MAX_CLIENT = 6
-var IP_ADDR = "35.230.124.84"
-#var IP_ADDR = "127.0.0.1"
+#var IP_ADDR = "35.230.124.84"
+var IP_ADDR = "127.0.0.1"
 var server = null
 var client = null
 
@@ -55,13 +55,12 @@ func reset_network_connection():
 
 func register_player():
 	local_player_id = get_tree().get_network_unique_id()
-	self.player_data = Save.save_data
+	self.player_data = Global.nickname
 	self.players[local_player_id] = player_data
 
 sync func update_players_data():
 	print("update_players_data()")
-#	get_tree().call_group("Player", "update_name")
 	for id in players:
-		var player_name = players[id]["Player_name"]
+		var player_name = players[id]
 		var player_node = get_node("/root/Game").get_node(str(id))
 		player_node.update_name(player_name)

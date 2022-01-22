@@ -2,7 +2,7 @@ extends KinematicBody
 
 
 var puppet_position = Vector2.ZERO
-var myname = ""
+var nickname = ""
 onready var tween = $Tween
 onready var timer = $NetworkTickRate
 onready var animation = $chopstick/AnimationPlayer
@@ -16,8 +16,7 @@ var ray_end = Vector3()
 
 func _ready():
 	if is_network_master():
-		name_label.text = myname
-#		rpc("update_name", myname)
+		name_label.text = nickname
 	animation.play("idle")
 
 func _physics_process(delta):
@@ -48,8 +47,8 @@ puppet func update_state(p_position):
 
 puppet func update_name(newname):
 	if not get_tree().is_network_server():
-		myname = newname
-		name_label.text = myname
+		nickname = newname
+		name_label.text = nickname
 
 func _on_NetworkTickRate_timeout():
 	if is_network_master():
