@@ -1,9 +1,6 @@
 extends Control
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var waiting_room = preload("res://scenes/WaitingRoom.tscn")
 var nickname = ""
 
 
@@ -16,9 +13,14 @@ func _on_ip_address_text_changed(new_text):
 
 
 func _on_Host_button_pressed():
-	Network.create_server()
+	if nickname == "":
+		$VBoxContainer/name.modulate = Color("ff0000")
+		return
+	Global.nickname = nickname
+	Global.host = true
+	Network.join_server()
 	hide()
-	
+	_join_waiting_room()
 	Global.emit_signal("instance_player", get_tree().get_network_unique_id())
 
 func _on_Join_button_pressed():
@@ -28,8 +30,12 @@ func _on_Join_button_pressed():
 	Global.nickname = nickname
 	Network.join_server()
 	hide()
-	
+	_join_waiting_room()
 	Global.emit_signal("instance_player", get_tree().get_network_unique_id())
 
 func _toggle_network_setup(visible_toggle):
 	visible = visible_toggle
+
+func _join_waiting_room():
+	var waiting_room_instance = waiting_room.instance()
+	get_parent().add_child(waiting_room_instance)

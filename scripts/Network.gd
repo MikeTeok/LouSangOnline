@@ -9,7 +9,7 @@ var client = null
 
 var local_player_id = 0
 sync var players = {}
-sync var player_data = {}
+sync var player_data = []
 
 func _ready():
 	get_tree().connect("connected_to_server", self, "_connected_to_server")
@@ -34,7 +34,9 @@ func join_server():
 	
 func _connected_to_server():
 	print("Successfully connected to the server")
-	
+	if Global.host:
+		Network.players["host"] = Global.nickname
+		rpc_id(1, "send_player_info", "host", Global.nickname)
 	register_player()
 	rpc_id(1, "send_player_info", local_player_id, player_data)
 
@@ -61,6 +63,8 @@ func register_player():
 sync func update_players_data():
 	print("update_players_data()")
 	for id in players:
+		if typeof(id) != TYPE_INT:
+			continue
 		var player_name = players[id]
 		var player_node = get_node("/root/Game").get_node(str(id))
 		player_node.update_name(player_name)

@@ -14,6 +14,8 @@ var ray_origin = Vector3()
 var ray_end = Vector3()
 
 func _ready():
+	set_physics_process(false)
+	set_process_input(false)
 	if is_network_master():
 		name_label.text = nickname
 	animation.play("idle")
