@@ -46,6 +46,11 @@ remotesync func update_state(state):
 puppet func update_position(p_position):
 	puppet_position = p_position
 
+func update_index(index):
+	var rotate_table = [0,180,90,270,45,225,135,315]
+#	Vector3(0,1,0).normalized(), p_rotation)
+	rotate_y(deg2rad(rotate_table[index]))
+
 puppet func update_name(newname):
 	if not get_tree().is_network_server():
 		nickname = newname
