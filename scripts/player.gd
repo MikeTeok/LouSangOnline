@@ -21,10 +21,11 @@ func _ready():
 
 func _physics_process(delta):
 	if is_network_master():
-		pass
+		rpc_unreliable("update_state", global_transform.origin)
+	else:
+		tween.interpolate_property(self, "global_transform", global_transform, Transform(global_transform.basis, puppet_position), 0.1)
+		tween.start()
 
-func _process(delta):
-	pass
 	
 func _move():
 	var space_state = get_world().direct_space_state
@@ -40,22 +41,11 @@ func _move():
 
 puppet func update_state(p_position):
 	puppet_position = p_position
-	
-	if not get_tree().is_network_server():
-		tween.interpolate_property(self, "global_transform", global_transform, Transform(global_transform.basis, p_position), 0.1)
-		tween.start()
 
 puppet func update_name(newname):
 	if not get_tree().is_network_server():
 		nickname = newname
 		name_label.text = nickname
-
-func _on_NetworkTickRate_timeout():
-	if is_network_master():
-		rpc_unreliable("update_state", global_transform.origin)
-	else:
-		timer.stop()
-
 
 func _input(event):
 	if not is_network_master():

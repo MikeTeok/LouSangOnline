@@ -34,10 +34,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.102707, 0 )
 [node name="AnimationPlayer" parent="chopstick" index="2"]
 anims/RESET = SubResource( 2 )
 
-[node name="NetworkTickRate" type="Timer" parent="."]
-wait_time = 0.03
-autostart = true
-
 [node name="Tween" type="Tween" parent="."]
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
@@ -64,6 +60,5 @@ billboard = 1
 texture = SubResource( 5 )
 
 [connection signal="animation_finished" from="chopstick/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
-[connection signal="timeout" from="NetworkTickRate" to="." method="_on_NetworkTickRate_timeout"]
 
 [editable path="chopstick"]
