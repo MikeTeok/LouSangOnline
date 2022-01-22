@@ -1,10 +1,9 @@
 extends KinematicBody
 
 
-var puppet_position = Vector2.ZERO
+var puppet_position = Vector3.ZERO
 var nickname = ""
 onready var tween = $Tween
-onready var timer = $NetworkTickRate
 onready var animation = $chopstick/AnimationPlayer
 onready var name_label = $NameLabel/Viewport/Label
 
@@ -21,11 +20,10 @@ func _ready():
 
 func _physics_process(delta):
 	if is_network_master():
-		rpc_unreliable("update_state", global_transform.origin)
+		rpc_unreliable("update_position", global_transform.origin)
 	else:
 		tween.interpolate_property(self, "global_transform", global_transform, Transform(global_transform.basis, puppet_position), 0.1)
 		tween.start()
-
 	
 func _move():
 	var space_state = get_world().direct_space_state
@@ -39,7 +37,11 @@ func _move():
 		var pos = intersection.position
 		global_transform.origin = Vector3(pos.x, pos.y, pos.z)
 
-puppet func update_state(p_position):
+remotesync func update_state(state):
+	current_state = state
+	animation.play(state)
+
+puppet func update_position(p_position):
 	puppet_position = p_position
 
 puppet func update_name(newname):
@@ -50,14 +52,16 @@ puppet func update_name(newname):
 func _input(event):
 	if not is_network_master():
 		return 
+	
+	var state = "idle"
 
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
-			current_state = "kiap"
-			animation.play("kiap")
+			state = "kiap"
 		elif event.button_index == BUTTON_LEFT and not event.pressed:
-			current_state = "release"
-			animation.play("release")
+			state = "release"
+		
+		rpc("update_state", state)
 	
 	if event is InputEventMouseMotion:
 		_move()
