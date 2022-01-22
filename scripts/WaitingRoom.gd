@@ -11,8 +11,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Network.players.has("host") and hostLabel.text == "Host: ":
-		hostLabel.text += Network.players["host"]
+	if Network.game_data.has("host") and hostLabel.text == "Host: ":
+		hostLabel.text += Network.game_data["host"]
 
 func _on_Start_button_pressed():
 	rpc_id(1, "start_game")
