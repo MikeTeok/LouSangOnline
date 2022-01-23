@@ -48,8 +48,7 @@ puppet func update_position(p_position):
 
 func update_index(index):
 	var rotate_table = [0,180,90,270,45,225,135,315]
-#	Vector3(0,1,0).normalized(), p_rotation)
-	rotate_y(deg2rad(rotate_table[index]))
+	set_rotation_degrees(Vector3(0,rotate_table[index],0))
 
 puppet func update_name(newname):
 	if not get_tree().is_network_server():
