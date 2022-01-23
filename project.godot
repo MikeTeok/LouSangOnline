@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="LouSangOnline"
-run/main_scene="res://scenes/Game.tscn"
+run/main_scene="res://scenes/Main.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -23,6 +23,11 @@ Global="*res://scripts/global.gd"
 
 window/size/width=1280
 window/size/height=720
+
+[global]
+
+main=false
+game=false
 
 [input]
 

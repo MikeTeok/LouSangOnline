@@ -64,6 +64,6 @@ func register_player():
 sync func update_players_data():
 	for id in players:
 		var player_name = players[id]["nickname"]
-		var player_node = get_node("/root/Game").get_node(str(id))
+		var player_node = get_node("/root/Main").get_node(str(id))
 		player_node.update_name(player_name)
 		player_node.update_index(players[id]["index"])

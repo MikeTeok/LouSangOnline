@@ -13,6 +13,9 @@ onready var camera
 var ray_origin = Vector3()
 var ray_end = Vector3()
 
+const ROTATE_TABLE = [0,180,90,270,45,225,135,315]
+const RADIUS = 5
+
 func _ready():
 	set_physics_process(false)
 	set_process_input(false)
@@ -46,9 +49,10 @@ remotesync func update_state(state):
 puppet func update_position(p_position):
 	puppet_position = p_position
 
-func update_index(index):
-	var rotate_table = [0,180,90,270,45,225,135,315]
-	set_rotation_degrees(Vector3(0,rotate_table[index],0))
+puppet func update_index(index):
+	var spawn_point = polar2cartesian(2, deg2rad(ROTATE_TABLE[index])).rotated(deg2rad(90))
+	set_translation(Vector3(spawn_point.x,0,spawn_point.y))
+	set_rotation_degrees(Vector3(0,ROTATE_TABLE[index],0))
 
 puppet func update_name(newname):
 	if not get_tree().is_network_server():
