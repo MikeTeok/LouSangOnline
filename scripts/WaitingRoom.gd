@@ -19,8 +19,6 @@ func _on_Start_button_pressed():
 
 sync func start_game_client():
 	for id in Network.players:
-		if typeof(id) != TYPE_INT:
-			continue
 		var player_name = Network.players[id]["nickname"]
 		var player_node = get_node("/root/Game").get_node(str(id))
 		player_node.set_physics_process(true)

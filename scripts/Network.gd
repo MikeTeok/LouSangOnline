@@ -63,8 +63,6 @@ func register_player():
 
 sync func update_players_data():
 	for id in players:
-		if typeof(id) != TYPE_INT:
-			continue
 		var player_name = players[id]["nickname"]
 		var player_node = get_node("/root/Game").get_node(str(id))
 		player_node.update_name(player_name)
