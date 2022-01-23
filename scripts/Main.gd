@@ -12,14 +12,12 @@ onready var endgame_button = $EndGame_button
 func _ready():
 	get_tree().connect("network_peer_connected", self, "_player_connected")
 	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
+	get_tree().connect("connected_to_server", self, "_connected_to_server")
 	
 	Global.connect("instance_player", self, "_instance_player")
 	
 	if get_tree().network_peer != null:
 		Global.emit_signal("toggle_network_setup", false)
-		
-	get_node("/root/Main/NetworkSetup").connect("host_game", self, "_player_host_game")
-	get_node("/root/Main/NetworkSetup").connect("join_game", self, "_player_join_game")
 	
 	endgame_button.hide()
 
@@ -49,11 +47,7 @@ func _player_disconnected(id):
 	if has_node(str(id)):
 		get_node(str(id)).queue_free()
 
-func _player_host_game():
-	Global.emit_signal("instance_player", get_tree().get_network_unique_id())
-	_join_waiting_room()
-
-func _player_join_game():
+func _connected_to_server():
 	Global.emit_signal("instance_player", get_tree().get_network_unique_id())
 	_join_waiting_room()
 
@@ -76,7 +70,11 @@ sync func start_game_client():
 		player_node.set_process_input(true)
 	
 	waiting_room_instance.queue_free()
-	endgame_button.show()
+	var id = get_tree().get_network_unique_id()
+	print(Network.players)
+	print(Network.game_data)
+	if Network.players[id]["nickname"] == Network.game_data["host"]:
+		endgame_button.show()
 
 sync func end_game_client():
 	endgame_button.hide()
