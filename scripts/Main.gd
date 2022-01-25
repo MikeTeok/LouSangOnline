@@ -8,7 +8,7 @@ onready var fps_text = $fps
 onready var game_instance
 var waiting_room_instance = null
 onready var endgame_button = $EndGame_button
-#onready var background = $background
+onready var background = $background
 onready var title = $title
 
 func _ready():
@@ -74,7 +74,7 @@ sync func start_game_client():
 		player_node.set_process_input(true)
 	
 	waiting_room_instance.queue_free()
-#	background.hide()
+	background.hide()
 	title.hide()
 	var id = get_tree().get_network_unique_id()
 	print(Network.players)
@@ -84,7 +84,7 @@ sync func start_game_client():
 
 sync func end_game_client():
 	endgame_button.hide()
-#	background.show()
+	background.show()
 	title.show()
 	game_instance.queue_free()
 	_join_waiting_room()

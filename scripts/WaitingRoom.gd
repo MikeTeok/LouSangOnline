@@ -1,7 +1,7 @@
 extends Control
 
-onready var hostLabel = $VBoxContainer/Host_label
-onready var startButton = $VBoxContainer/Start_button
+onready var hostLabel = $Host_label
+onready var startButton = $Start_button
 
 signal start_game
 

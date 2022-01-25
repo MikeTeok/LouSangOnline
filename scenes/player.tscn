@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/chopstick.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/player.gd" type="Script" id=2]
-[ext_resource path="res://materials/mengna.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://resources/fonts/mengna.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="Animation" id=2]
 length = 0.001

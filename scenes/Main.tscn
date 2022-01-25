@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=14 format=2]
 
+[ext_resource path="res://resources/fonts/mengna.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scripts/NetworkSetup.gd" type="Script" id=2]
 [ext_resource path="res://scripts/Main.gd" type="Script" id=3]
 [ext_resource path="res://scenes/RtsCameralController.tscn" type="PackedScene" id=4]
@@ -8,6 +9,17 @@
 [ext_resource path="res://resources/buttons/join button.png" type="Texture" id=7]
 [ext_resource path="res://scenes/background.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/title.tscn" type="PackedScene" id=9]
+[ext_resource path="res://resources/buttons/end game button.png" type="Texture" id=10]
+[ext_resource path="res://resources/buttons/end game button hover.png" type="Texture" id=11]
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 0 )
+border_width_bottom = 3
+border_color = Color( 1, 0.956863, 0.419608, 1 )
 
 [node name="Main" type="Spatial"]
 script = ExtResource( 3 )
@@ -53,45 +65,38 @@ margin_right = 229.0
 normal_texture = ExtResource( 7 )
 hover_texture = ExtResource( 6 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="NetworkSetup"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -164.0
-margin_top = -71.0
-margin_right = 160.0
-margin_bottom = 81.0
-alignment = 1
-__meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="name" type="LineEdit" parent="NetworkSetup/VBoxContainer"]
-margin_top = 64.0
-margin_right = 324.0
-margin_bottom = 88.0
+[node name="name" type="LineEdit" parent="NetworkSetup"]
+margin_left = 744.0
+margin_top = 494.0
+margin_right = 1169.0
+margin_bottom = 557.0
+rect_pivot_offset = Vector2( 211, 31 )
+custom_fonts/font = SubResource( 2 )
+custom_styles/normal = SubResource( 1 )
 align = 1
 placeholder_text = "Name"
+placeholder_alpha = 0.793
 caret_blink = true
 caret_blink_speed = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="RtsCameralController" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.84464, 0 )
 
-[node name="EndGame_button" type="Button" parent="."]
-margin_left = 956.0
-margin_right = 1280.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 0, 60 )
-rect_pivot_offset = Vector2( 554, 203 )
-text = "End Game"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="EndGame_button" parent="." instance=ExtResource( 5 )]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+margin_left = -527.0
+margin_right = 0.0
+margin_bottom = 195.0
+rect_scale = Vector2( 0.5, 0.5 )
+normal_texture = ExtResource( 10 )
+hover_texture = ExtResource( 11 )
 
 [connection signal="pressed" from="NetworkSetup/Host_button" to="NetworkSetup" method="_on_Host_button_pressed"]
 [connection signal="pressed" from="NetworkSetup/Join_button" to="NetworkSetup" method="_on_Join_button_pressed"]
-[connection signal="text_changed" from="NetworkSetup/VBoxContainer/name" to="NetworkSetup" method="_on_ip_address_text_changed"]
+[connection signal="text_changed" from="NetworkSetup/name" to="NetworkSetup" method="_on_ip_address_text_changed"]
 [connection signal="pressed" from="EndGame_button" to="." method="_on_EndGame_button_pressed"]

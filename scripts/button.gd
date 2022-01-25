@@ -2,6 +2,7 @@ extends Control
 
 export(Texture) var normal_texture
 export(Texture) var hover_texture
+export var disabled = false
 
 onready var normal_button = $normal
 onready var hover_button = $hover
@@ -16,6 +17,11 @@ func _ready():
 	
 	normal_button.modulate = Color(1,1,1,1)
 	hover_button.modulate = Color(1,1,1,0)
+
+func _process(delta):
+	if disabled:
+		normal_button.modulate = Color(0.18,0.23,0.59,0.8)
+		hover_button.modulate = Color(1,1,1,0)
 
 func active_hover():
 	tween.interpolate_property(normal_button, "modulate", normal_button.modulate, Color(1,1,1,0), 0.3, 0,Tween.EASE_IN_OUT)
@@ -36,13 +42,19 @@ func active_clicked():
 	tween.start()
 
 func _on_button_mouse_entered():
+	if disabled:
+		return
 	active_hover()
 
 func _on_button_mouse_exited():
+	if disabled:
+		return
 	active_normal()
 
 
 func _on_button_gui_input(event):
+	if disabled: 
+		return
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
 			active_clicked()
