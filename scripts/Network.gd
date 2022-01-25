@@ -2,8 +2,8 @@ extends Node
 
 const DEFAULT_PORT = 28960
 const MAX_CLIENT = 6
-var IP_ADDR = "35.230.124.84"
-#var IP_ADDR = "127.0.0.1"
+#var IP_ADDR = "35.230.124.84"
+var IP_ADDR = "127.0.0.1"
 var server = null
 var client = null
 
