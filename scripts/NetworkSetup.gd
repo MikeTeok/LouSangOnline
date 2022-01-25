@@ -14,7 +14,7 @@ func _on_ip_address_text_changed(new_text):
 
 func _on_Host_button_pressed():
 	if nickname == "":
-		$name.modulate = Color("ff0000")
+		$name.modulate = Color("000000")
 		return
 	Global.nickname = nickname
 	Global.host = true
@@ -24,7 +24,7 @@ func _on_Host_button_pressed():
 	
 func _on_Join_button_pressed():
 	if nickname == "":
-		$name.modulate = Color("ff0000")
+		$name.modulate = Color("000000")
 		return
 	Global.nickname = nickname
 	Network.join_server()

@@ -66,9 +66,9 @@ hover_texture = ExtResource( 6 )
 
 [node name="name" type="LineEdit" parent="NetworkSetup"]
 margin_left = 744.0
-margin_top = 494.0
+margin_top = 479.0
 margin_right = 1169.0
-margin_bottom = 557.0
+margin_bottom = 542.0
 rect_pivot_offset = Vector2( 211, 31 )
 custom_fonts/font = SubResource( 2 )
 custom_styles/normal = SubResource( 1 )

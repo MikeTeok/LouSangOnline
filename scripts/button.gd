@@ -7,6 +7,7 @@ export var disabled = false
 onready var normal_button = $normal
 onready var hover_button = $hover
 onready var tween = $Tween
+onready var sound_effect = $sound
 
 signal pressed
 
@@ -45,11 +46,14 @@ func _on_button_mouse_entered():
 	if disabled:
 		return
 	active_hover()
+	sound_effect.stream_paused = false
+	sound_effect.play(1.5)
 
 func _on_button_mouse_exited():
 	if disabled:
 		return
 	active_normal()
+	sound_effect.stream_paused = true
 
 
 func _on_button_gui_input(event):
@@ -61,3 +65,7 @@ func _on_button_gui_input(event):
 			emit_signal("pressed")
 		elif event.button_index == BUTTON_LEFT and not event.pressed:
 			active_hover()
+
+
+func _on_sound_finished():
+	sound_effect.stream_paused = true
