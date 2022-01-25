@@ -23,7 +23,7 @@ func _instance_player(id):
 		player_instance.set_network_master(id)
 		player_instance.name = str(id)
 		player_instance.nickname = Global.nickname
-		player_instance.camera = $RtsCameralController/Elevation/Camera
+		player_instance.camera = $Camera
 		add_child(player_instance)
 		player_instance.global_transform.origin = Vector3(0, 0, 0)
 	

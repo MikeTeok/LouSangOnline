@@ -2,14 +2,16 @@ extends Spatial
 
 var player = preload("res://scenes/player.tscn")
 var game = preload("res://scenes/Game.tscn")
+var background = preload("res://scenes/background.tscn")
+var title = preload("res://scenes/title.tscn")
 var waiting_room = preload("res://scenes/WaitingRoom.tscn")
 
 onready var fps_text = $fps
 onready var game_instance
 var waiting_room_instance = null
 onready var endgame_button = $EndGame_button
-onready var background = $background
-onready var title = $title
+onready var background_instance = $background
+onready var title_instance = $title
 
 func _ready():
 	get_tree().connect("network_peer_connected", self, "_player_connected")
@@ -34,7 +36,7 @@ func _instance_player(id):
 		player_instance.set_network_master(id)
 		player_instance.name = str(id)
 		player_instance.nickname = Global.nickname
-		player_instance.camera = $RtsCameralController/Elevation/Camera
+		player_instance.camera = $Camera
 		add_child(player_instance)
 		player_instance.global_transform.origin = Vector3(0, 0, 0)
 	
@@ -74,8 +76,8 @@ sync func start_game_client():
 		player_node.set_process_input(true)
 	
 	waiting_room_instance.queue_free()
-	background.hide()
-	title.hide()
+	background_instance.queue_free()
+	title_instance.queue_free()
 	var id = get_tree().get_network_unique_id()
 	print(Network.players)
 	print(Network.game_data)
@@ -84,8 +86,10 @@ sync func start_game_client():
 
 sync func end_game_client():
 	endgame_button.hide()
-	background.show()
-	title.show()
+	background_instance = background.instance()
+	add_child(background_instance)
+	title_instance = title.instance()
+	add_child(title_instance)
 	game_instance.queue_free()
 	_join_waiting_room()
 	
