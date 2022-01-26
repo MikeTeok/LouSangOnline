@@ -53,6 +53,8 @@ puppet func update_index(index):
 	var spawn_point = polar2cartesian(2, deg2rad(ROTATE_TABLE[index])).rotated(deg2rad(90))
 	set_translation(Vector3(spawn_point.x,0,spawn_point.y))
 	set_rotation_degrees(Vector3(0,ROTATE_TABLE[index],0))
+	if is_network_master():
+		camera.set_rotation_degrees(Vector3(-90,0,ROTATE_TABLE[index]))
 
 puppet func update_name(newname):
 	if not get_tree().is_network_server():
