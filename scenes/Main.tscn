@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://resources/fonts/mengna.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scripts/NetworkSetup.gd" type="Script" id=2]
 [ext_resource path="res://scripts/Main.gd" type="Script" id=3]
+[ext_resource path="res://resources/bgm.ogg" type="AudioStream" id=4]
 [ext_resource path="res://scenes/button.tscn" type="PackedScene" id=5]
 [ext_resource path="res://resources/buttons/join button hover.png" type="Texture" id=6]
 [ext_resource path="res://resources/buttons/join button.png" type="Texture" id=7]
@@ -10,15 +11,11 @@
 [ext_resource path="res://scenes/title.tscn" type="PackedScene" id=9]
 [ext_resource path="res://resources/buttons/end game button.png" type="Texture" id=10]
 [ext_resource path="res://resources/buttons/end game button hover.png" type="Texture" id=11]
+[ext_resource path="res://resources/nameline.tres" type="StyleBox" id=12]
 
 [sub_resource type="DynamicFont" id=2]
 size = 40
 font_data = ExtResource( 1 )
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0, 0, 0, 0 )
-border_width_bottom = 3
-border_color = Color( 1, 0.956863, 0.419608, 1 )
 
 [node name="Main" type="Spatial"]
 script = ExtResource( 3 )
@@ -71,7 +68,8 @@ margin_right = 1169.0
 margin_bottom = 542.0
 rect_pivot_offset = Vector2( 211, 31 )
 custom_fonts/font = SubResource( 2 )
-custom_styles/normal = SubResource( 1 )
+custom_styles/focus = ExtResource( 12 )
+custom_styles/normal = ExtResource( 12 )
 align = 1
 placeholder_text = "Name"
 placeholder_alpha = 0.793
@@ -94,6 +92,10 @@ hover_texture = ExtResource( 11 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.54236, 0 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
 
 [connection signal="pressed" from="NetworkSetup/Host_button" to="NetworkSetup" method="_on_Host_button_pressed"]
 [connection signal="pressed" from="NetworkSetup/Join_button" to="NetworkSetup" method="_on_Join_button_pressed"]
