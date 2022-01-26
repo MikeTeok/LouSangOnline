@@ -20,7 +20,6 @@ func _on_Host_button_pressed():
 	Global.host = true
 	Network.join_server()
 	hide()
-	emit_signal("host_game")
 	
 func _on_Join_button_pressed():
 	if nickname == "":
@@ -29,7 +28,6 @@ func _on_Join_button_pressed():
 	Global.nickname = nickname
 	Network.join_server()
 	hide()
-	emit_signal("join_game")
 	
 func _toggle_network_setup(visible_toggle):
 	visible = visible_toggle
