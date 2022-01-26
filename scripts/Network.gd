@@ -67,3 +67,6 @@ sync func update_players_data():
 		var player_node = get_node("/root/Main").get_node(str(id))
 		player_node.update_name(player_name)
 		player_node.update_index(players[id]["index"])
+
+sync func update_waiting_room():
+	get_tree().call_group("WaitingRoom", "refresh_waiting_room", players)
