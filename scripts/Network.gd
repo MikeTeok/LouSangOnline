@@ -36,7 +36,6 @@ func join_server():
 func _connected_to_server():
 	print("Successfully connected to the server")
 	if Global.host:
-		Network.game_data["host"] = get_tree().get_network_unique_id()
 		rpc_id(1, "send_player_info", "host", get_tree().get_network_unique_id())
 	register_player()
 	rpc_id(1, "send_player_info", local_player_id, player_data)
@@ -68,5 +67,7 @@ sync func update_players_data():
 		player_node.update_name(player_name)
 		player_node.update_index(players[id]["index"])
 
-sync func update_waiting_room():
+sync func update_waiting_room(_game_data):
+	print(_game_data)
+	self.game_data = _game_data
 	get_tree().call_group("WaitingRoom", "refresh_waiting_room", players)

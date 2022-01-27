@@ -67,14 +67,14 @@ func _join_waiting_room():
 
 func _start_game():
 	rpc_id(1, "start_game")
-	
+
 sync func start_game_client():
 	for id in Network.players:
 		var player_name = Network.players[id]["nickname"]
 		var player_node = get_node("/root/Main").get_node(str(id))
 		player_node.set_physics_process(true)
 		player_node.set_process_input(true)
-	
+
 	waiting_room_instance.queue_free()
 	background_instance.queue_free()
 	title_instance.queue_free()
@@ -92,8 +92,6 @@ sync func end_game_client():
 	add_child(title_instance)
 	game_instance.queue_free()
 	_join_waiting_room()
-	
-	
+
 func _on_EndGame_button_pressed():
 	rpc_id(1, "end_game")
-

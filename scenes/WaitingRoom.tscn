@@ -53,6 +53,7 @@ margin_bottom = 7.85999
 rect_pivot_offset = Vector2( 263.5, 97.5 )
 normal_texture = ExtResource( 3 )
 hover_texture = ExtResource( 2 )
+disabled = true
 
 [node name="ItemList" type="ItemList" parent="."]
 anchor_left = 1.0

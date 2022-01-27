@@ -7,7 +7,6 @@ signal start_game
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	startButton.disabled = (Network.game_data["host"] != get_tree().get_network_unique_id())
 	refresh_waiting_room(Network.players)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,6 +17,8 @@ func _on_Start_button_pressed():
 	emit_signal("start_game")
 
 func refresh_waiting_room(players):
+	if Network.game_data.has("host"):
+		startButton.disabled = (Network.game_data["host"] != get_tree().get_network_unique_id())
 	playerList.clear()
 	for id in players:
 		var star = null
