@@ -95,7 +95,7 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 7.54
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
-volume_db = -5.0
+volume_db = -15.0
 autoplay = true
 
 [connection signal="pressed" from="NetworkSetup/Host_button" to="NetworkSetup" method="_on_Host_button_pressed"]

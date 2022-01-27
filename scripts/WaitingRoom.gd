@@ -20,9 +20,10 @@ func _on_Start_button_pressed():
 func refresh_waiting_room(players):
 	playerList.clear()
 	for id in players:
+		var star = null
 		var player_name = players[id]["nickname"]
 		if Network.game_data.has("host"):
 			if player_name == Network.game_data["host"]:
-				player_name = "★ " + player_name
-		playerList.add_item(player_name, null, false)
+				star = load("res://resources/star.png")
+		playerList.add_item(player_name, star, false)
 	
