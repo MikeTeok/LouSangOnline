@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://materials/fabric.material" type="Material" id=1]
+[ext_resource path="res://scenes/salmon.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/plate.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/multipieces.tscn" type="PackedScene" id=5]
 
@@ -54,3 +55,30 @@ light_indirect_energy = 2.0
 
 [node name="plate" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0622966, 0 )
+
+[node name="salmon" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0889326, 0.492035, 0.0773687 )
+
+[node name="salmon2" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.549524, 0.52542, 0.00805151 )
+
+[node name="salmon3" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38085, 0.534317, -0.0115485 )
+
+[node name="salmon4" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0889326, 0.770252, 0.0776057 )
+
+[node name="salmon5" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.549524, 0.803637, 0.0082885 )
+
+[node name="salmon6" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38085, 0.812534, -0.0113115 )
+
+[node name="salmon7" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0889326, 1.0806, -0.0118806 )
+
+[node name="salmon8" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.549524, 1.11398, -0.0811979 )
+
+[node name="salmon9" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38085, 1.12288, -0.100798 )
