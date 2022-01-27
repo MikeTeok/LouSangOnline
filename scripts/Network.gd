@@ -36,8 +36,8 @@ func join_server():
 func _connected_to_server():
 	print("Successfully connected to the server")
 	if Global.host:
-		Network.game_data["host"] = Global.nickname
-		rpc_id(1, "send_player_info", "host", Global.nickname)
+		Network.game_data["host"] = get_tree().get_network_unique_id()
+		rpc_id(1, "send_player_info", "host", get_tree().get_network_unique_id())
 	register_player()
 	rpc_id(1, "send_player_info", local_player_id, player_data)
 

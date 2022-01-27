@@ -81,7 +81,7 @@ sync func start_game_client():
 	var id = get_tree().get_network_unique_id()
 	print(Network.players)
 	print(Network.game_data)
-	if Network.players[id]["nickname"] == Network.game_data["host"]:
+	if id == Network.game_data["host"]:
 		endgame_button.show()
 
 sync func end_game_client():
