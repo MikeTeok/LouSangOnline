@@ -2,7 +2,7 @@ extends Control
 
 export(Texture) var normal_texture
 export(Texture) var hover_texture
-export var disabled = false
+export var disabled = false setget set_disable
 
 onready var normal_button = $normal
 onready var hover_button = $hover
@@ -15,13 +15,25 @@ signal pressed
 func _ready():
 	normal_button.texture = normal_texture
 	hover_button.texture = hover_texture
-	
-	normal_button.modulate = Color(1,1,1,1)
-	hover_button.modulate = Color(1,1,1,0)
 
-func _process(delta):
 	if disabled:
 		normal_button.modulate = Color(0.18,0.23,0.59,0.8)
+		hover_button.modulate = Color(1,1,1,0)
+	else:
+		normal_button.modulate = Color(1,1,1,1)
+		hover_button.modulate = Color(1,1,1,0)
+
+func set_disable(new_value):
+	disabled = new_value
+	
+	if normal_button == null:
+		return
+	
+	if disabled:
+		normal_button.modulate = Color(0.18,0.23,0.59,0.8)
+		hover_button.modulate = Color(1,1,1,0)
+	else:
+		normal_button.modulate = Color(1,1,1,1)
 		hover_button.modulate = Color(1,1,1,0)
 
 func active_hover():

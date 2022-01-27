@@ -60,14 +60,14 @@ func register_player():
 	self.player_data["nickname"] = Global.nickname
 	self.players[local_player_id] = player_data
 
-sync func update_players_data():
+sync func update_players_data(_players, _game_data):
+	self.players = _players
 	for id in players:
 		var player_name = players[id]["nickname"]
 		var player_node = get_node("/root/Main").get_node(str(id))
 		player_node.update_name(player_name)
 		player_node.update_index(players[id]["index"])
-
-sync func update_waiting_room(_game_data):
-	print(_game_data)
+	
 	self.game_data = _game_data
 	get_tree().call_group("WaitingRoom", "refresh_waiting_room", players)
+

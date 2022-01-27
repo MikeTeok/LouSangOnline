@@ -18,6 +18,7 @@ func _on_Start_button_pressed():
 
 func refresh_waiting_room(players):
 	if Network.game_data.has("host"):
+		print("got set true")
 		startButton.disabled = (Network.game_data["host"] != get_tree().get_network_unique_id())
 	playerList.clear()
 	for id in players:
@@ -26,5 +27,7 @@ func refresh_waiting_room(players):
 		if Network.game_data.has("host"):
 			if id == Network.game_data["host"]:
 				star = load("res://resources/star.png")
+			else:
+				player_name = "       " + player_name
 		playerList.add_item(player_name, star, false)
 	
