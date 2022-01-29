@@ -12,7 +12,10 @@ config_version=4
 
 config/name="LouSangOnline"
 run/main_scene="res://scenes/Main.tscn"
+boot_splash/image="res://resources/gnoki.png"
+boot_splash/fullsize=false
 config/icon="res://icon.png"
+config/windows_native_icon="res://resources/icon.ico"
 
 [autoload]
 
