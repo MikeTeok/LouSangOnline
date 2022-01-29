@@ -39,11 +39,16 @@ func _instance_player(id):
 		player_instance.camera = $Camera
 		add_child(player_instance)
 		player_instance.global_transform.origin = Vector3(0, 0, 0)
+		return player_instance
 	
 func _player_connected(id):
 	print("Player " + str(id) + " has connected")
 	
-	_instance_player(id)
+	var player_node = _instance_player(id)
+	if player_node != null:
+		player_node.visible = false
+		player_node.set_physics_process(false)
+		player_node.set_process_input(false)
 
 func _player_disconnected(id):
 	print("Player " + str(id) + " has disconnected")
@@ -72,9 +77,10 @@ sync func start_game_client():
 	for id in Network.players:
 		var player_name = Network.players[id]["nickname"]
 		var player_node = get_node("/root/Main").get_node(str(id))
+		player_node.visible = true
 		player_node.set_physics_process(true)
 		player_node.set_process_input(true)
-
+	
 	waiting_room_instance.queue_free()
 	background_instance.queue_free()
 	title_instance.queue_free()
@@ -85,13 +91,14 @@ sync func start_game_client():
 		endgame_button.show()
 
 sync func end_game_client():
-	endgame_button.hide()
-	background_instance = background.instance()
-	add_child(background_instance)
-	title_instance = title.instance()
-	add_child(title_instance)
-	game_instance.queue_free()
-	_join_waiting_room()
+	if get_node_or_null("/root/Main/WaitingRoom") == null:
+		endgame_button.hide()
+		background_instance = background.instance()
+		add_child(background_instance)
+		title_instance = title.instance()
+		add_child(title_instance)
+		game_instance.queue_free()
+		_join_waiting_room()
 
 func _on_EndGame_button_pressed():
 	rpc_id(1, "end_game")
