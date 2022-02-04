@@ -13,7 +13,6 @@ onready var camera
 var ray_origin = Vector3()
 var ray_end = Vector3()
 
-const ROTATE_TABLE = [0,180,90,270,45,225,135,315]
 const RADIUS = 5
 
 func _ready():
@@ -50,11 +49,11 @@ puppet func update_position(p_position):
 	puppet_position = p_position
 
 puppet func update_index(index):
-	var spawn_point = polar2cartesian(2, deg2rad(ROTATE_TABLE[index])).rotated(deg2rad(90))
+	var spawn_point = polar2cartesian(2, deg2rad(Global.ROTATE_TABLE[index])).rotated(deg2rad(90))
 	set_translation(Vector3(spawn_point.x,0,spawn_point.y))
-	set_rotation_degrees(Vector3(0,ROTATE_TABLE[index],0))
+	set_rotation_degrees(Vector3(0,Global.ROTATE_TABLE[index],0))
 	if is_network_master():
-		camera.set_rotation_degrees(Vector3(-90,0,ROTATE_TABLE[index]))
+		camera.set_rotation_degrees(Vector3(-90,0,Global.ROTATE_TABLE[index]))
 
 puppet func update_name(newname):
 	if not get_tree().is_network_server():

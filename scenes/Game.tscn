@@ -10,7 +10,7 @@ extents = Vector3( 25, 1, 25 )
 
 [sub_resource type="PlaneMesh" id=2]
 material = ExtResource( 1 )
-size = Vector2( 20, 20 )
+size = Vector2( 25, 25 )
 
 [node name="Game" type="Spatial"]
 

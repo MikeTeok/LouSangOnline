@@ -18,7 +18,6 @@ func _on_Start_button_pressed():
 
 func refresh_waiting_room(players):
 	if Network.game_data.has("host"):
-		print("got set true")
 		startButton.disabled = (Network.game_data["host"] != get_tree().get_network_unique_id())
 	playerList.clear()
 	for id in players:
