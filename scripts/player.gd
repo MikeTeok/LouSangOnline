@@ -28,7 +28,7 @@ func _physics_process(delta):
 	if current_rotation_degree != prev_rotation_degree:
 		prev_rotation_degree = current_rotation_degree
 		set_rotation_degrees(Vector3(0,current_rotation_degree,0))
-		
+
 	if Global.game_state == "WAITING":
 		return
 		
@@ -63,7 +63,7 @@ func update_index(index):
 	if is_network_master():
 		camera.set_rotation_degrees(Vector3(-90,0,Global.ROTATE_TABLE[index]))
 	if Global.game_state == "WAITING":
-		var spawn_point = polar2cartesian(2, deg2rad(current_rotation_degree)).rotated(deg2rad(-90))
+		var spawn_point = polar2cartesian(2, deg2rad(-1*current_rotation_degree)).rotated(deg2rad(90))
 		set_translation(Vector3(spawn_point.x,0,spawn_point.y))
 
 puppet func update_name(newname):
