@@ -74,6 +74,7 @@ func _start_game():
 	rpc_id(1, "start_game")
 
 sync func start_game_client():
+	Global.game_state = "PLAYING"
 	for id in Network.players:
 		var player_name = Network.players[id]["nickname"]
 		var player_node = get_node("/root/Main").get_node(str(id))
@@ -91,6 +92,7 @@ sync func start_game_client():
 		endgame_button.show()
 
 sync func end_game_client():
+	Global.game_state = "WAITING"
 	if get_node_or_null("/root/Main/WaitingRoom") == null:
 		endgame_button.hide()
 		background_instance = background.instance()

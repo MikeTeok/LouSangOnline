@@ -62,7 +62,6 @@ func register_player():
 
 sync func update_players_data(_players, _game_data):
 	self.players = _players
-	print("player size " + str(players.size()))
 	Global.calculate_rotate_table(self.players.size())
 	for id in players:
 		var player_name = players[id]["nickname"]

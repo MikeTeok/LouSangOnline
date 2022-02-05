@@ -12,6 +12,8 @@ onready var current_state = "idle"
 onready var camera 
 var ray_origin = Vector3()
 var ray_end = Vector3()
+var prev_rotation_degree = 0
+var current_rotation_degree = 0
 
 const RADIUS = 5
 
@@ -23,6 +25,13 @@ func _ready():
 	animation.play("idle")
 
 func _physics_process(delta):
+	if current_rotation_degree != prev_rotation_degree:
+		prev_rotation_degree = current_rotation_degree
+		set_rotation_degrees(Vector3(0,current_rotation_degree,0))
+		
+	if Global.game_state == "WAITING":
+		return
+		
 	if is_network_master():
 		rpc_unreliable("update_position", global_transform.origin)
 	else:
@@ -48,12 +57,14 @@ remotesync func update_state(state):
 puppet func update_position(p_position):
 	puppet_position = p_position
 
-puppet func update_index(index):
-	var spawn_point = polar2cartesian(2, deg2rad(Global.ROTATE_TABLE[index])).rotated(deg2rad(90))
-	set_translation(Vector3(spawn_point.x,0,spawn_point.y))
-	set_rotation_degrees(Vector3(0,Global.ROTATE_TABLE[index],0))
+func update_index(index):
+	current_rotation_degree = Global.ROTATE_TABLE[index] 
+	
 	if is_network_master():
 		camera.set_rotation_degrees(Vector3(-90,0,Global.ROTATE_TABLE[index]))
+	if Global.game_state == "WAITING":
+		var spawn_point = polar2cartesian(2, deg2rad(current_rotation_degree)).rotated(deg2rad(-90))
+		set_translation(Vector3(spawn_point.x,0,spawn_point.y))
 
 puppet func update_name(newname):
 	if not get_tree().is_network_server():
@@ -61,7 +72,7 @@ puppet func update_name(newname):
 		name_label.text = nickname
 
 func _input(event):
-	if not is_network_master():
+	if not is_network_master() or Global.game_state == "WAITING":
 		return 
 	
 	var state = "idle"
